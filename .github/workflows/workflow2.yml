@@ -1,0 +1,20 @@
+name: Send trigger for updating robottelo image on quay.
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+  trigger-robottelo-workflow:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger workflow in robottelo repo
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CHERRYPICK_PAT }}" \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/jameerpathan111/testing_repo1/dispatches \
+            --data '{"event_type": "airgun-pr-merged", "client_payload":{"tag":${GITHUB_REF##*/}}}'
