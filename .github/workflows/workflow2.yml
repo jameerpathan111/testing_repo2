@@ -1,4 +1,4 @@
-name: Send trigger for updating robottelo image on quay.
+name: Send trigger for updating robottelo image on quay..
 on:
   push:
     branches:
