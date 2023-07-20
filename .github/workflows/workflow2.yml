@@ -1,9 +1,6 @@
 name: Send trigger for updating robottelo image on quay.
 on:
   push:
-    branches:
-      - main
-      - test
 
 jobs:
   trigger-robottelo-workflow:
